@@ -3,6 +3,26 @@
     src: url("../assets/font-styles/digital-7.regular.ttf");
 }
 
-p{
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body{
+    margin: 5px;
+}
+
+#screen{
+    border: 2px black solid;
+    overflow: auto;
+    height: 30vh;
+    background: rgba(246,240,229, 0.2);
+}
+
+.value{
     font-family: "Digital-7";
+    float: right;
+    font-size: 30vh;
+    ;
 }
