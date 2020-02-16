@@ -1,0 +1,8 @@
+@font-face{
+    font-family: "Digital-7";
+    src: url("../assets/font-styles/digital-7.regular.ttf");
+}
+
+p{
+    font-family: "Digital-7";
+}
