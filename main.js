@@ -11,8 +11,6 @@ function createWindow () {
       height: 600,
       minHeight: 480,
       minWidth: 320,
-    //   transparent: true,
-    //   frame: false
     })
   
     // and load the index.html of the app.

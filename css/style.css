@@ -11,14 +11,17 @@
 }
 
 body{
-    margin: 5px;
+    background: #555; 
 }
 
+
+/* Screen container */
+
 #screen{
-    border: 2px black solid;
+    
     overflow: auto;
     height: 30vh;
-    background: rgba(246,240,229, 0.2);
+    background: #C9D9C8;
 }
 
 .value{
@@ -28,6 +31,47 @@ body{
     
 }
 
+/* Buttons Container */
+
+#buttons{
+    height: 70vh;
+}
+
 .row{
     display: flex;
+    height: 20%;
+}
+
+/* Individual buttons */
+
+.btn{
+    width: 25vw;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 1px;
+    color: #333;
+}
+
+.btn:first-child{
+    margin-left: 0;
+}
+
+.btn:last-child{
+    margin-right: 0;
+}
+
+.btn:hover{
+    background:#CC474B;
+    color: white;
+}
+
+.num{
+    background: floralwhite;
+}
+
+.ops{
+    background: #DFE1E5;
+}
+.equal{
+    background: #EDA746;
 }
