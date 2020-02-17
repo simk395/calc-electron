@@ -65,6 +65,10 @@ body{
     color: white;
 }
 
+.btn:focus{
+    outline: none;
+}
+
 .num{
     background: floralwhite;
 }
