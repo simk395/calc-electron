@@ -25,5 +25,9 @@ body{
     font-family: "Digital-7";
     float: right;
     font-size: 30vh;
-    ;
+    
+}
+
+.row{
+    display: flex;
 }
