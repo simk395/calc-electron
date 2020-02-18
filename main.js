@@ -1,7 +1,8 @@
 const { app, BrowserWindow } = require('electron')
+const path = require('path')
 
 require('electron-reload')(__dirname, {
-    electron: require(`${__dirname}/node_modules/electron`)
+  electron: path.join(__dirname, '/node_modules/.bin/electron')
 });
 
 function createWindow () {
@@ -17,7 +18,7 @@ function createWindow () {
     })
   
     // and load the index.html of the app.
-    win.loadFile('index.html')
+    win.loadFile('public/index.html')
 
     //hide menu bar
     win.setMenu(null)
