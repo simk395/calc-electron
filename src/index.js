@@ -12,7 +12,7 @@ let buttonHandler = (e) => {
             value.innerText = clear; 
             break;
         //Use eval() for string to get value
-        case "=": value.innerText = eval(string);
+        case "=": value.innerText = eval(string).toFixed(5);
         //fix edge case if click on margin
         case undefined: break;
         //display values on screen
