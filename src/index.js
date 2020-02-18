@@ -1,6 +1,6 @@
 let buttons = document.querySelector("#buttons"),
-    string = "",
-    clear = 0;
+    str = "",
+    valArr = [];
 
 //handles numeric and operational buttons
 let buttonHandler = (e) => {
@@ -8,19 +8,41 @@ let buttonHandler = (e) => {
     switch(e.target.value){
         //clear
         case "C": 
-            string = "";
-            value.innerText = clear; 
+            str = "";
+            value.innerText = 0; 
             break;
-        //Use eval() for string to get value
-        case "=": value.innerText = eval(string).toFixed(5);
+        
+        case "+":
+            valArr.push(str)
+            valArr.push("+")
+            str = ''
+        //Use eval() for str to get value
+        case "=":
+            if(str[str.length - 1].match(/[/+-/*]/g)){
+                str = str.substring(0, str.length - 1);
+                value.innerText = Math.round(eval(str) *100000)/100000;  
+            } else{
+                value.innerText = Math.round(eval(str) *100000)/100000;
+            }; 
+            str = value.innerText;
+            break;
         //fix edge case if click on margin
         case undefined: break;
         //display values on screen
         default: 
-            string += e.target.value;
-            value.innerText = string;
+            if( e.target.classList.contains("ops") 
+                && str[str.length - 1].match(/[/+-/*()%]/g)){
+               str = str.substring(0, str.length - 1) + e.target.value;
+               value.innerText = str;
+               console.log("hello")
+            }else{
+                str += e.target.value;
+                value.innerText = str;
+            }
     }
-
 }
 
 buttons.addEventListener("click", buttonHandler);
+
+
+// str[str.length - 1].match(/[/+-/*()]/g
