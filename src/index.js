@@ -7,23 +7,33 @@ const operations = {
     plus: () => {
         valArr.push(str, "+");
         str = '';
+        flag = true;
     },
     minus: () => {
         valArr.push(str, "-");
         str = '';
+        flag = true;
     },
     divide: () => {
         valArr.push(str, "/");
         str = '';
+        flag = true;
     },
     multiply: () => {
         valArr.push(str, "*");
         str = '';
+        flag = true;
     },
     modular: () => {
         valArr.push(str, "%");
         str = '';
+        flag = true;
     },
+    sqrt: () => {
+        valArr.push(Math.sqrt(str));
+        str = '';
+        flag = true;
+    }
 }
 
 //handles numeric and operational buttons
@@ -39,26 +49,30 @@ let buttonHandler = (e) => {
         
         case "+":
             operations.plus()
-            value.innerText = 0;
             break;
 
         case "-":
             operations.minus()
-            value.innerText = 0;
             break;
 
         case "*":
             operations.multiply()
-            value.innerText = 0;
             break;
 
         case "/":
             operations.divide()
-            value.innerText = 0;
             break;
+
         case "%":
             operations.modular()
-            value.innerText = 0;
+            break;
+
+        case "sqrt":
+            if(!valArr.length) value.innerText = Math.sqrt(str);
+            else {
+                operations.sqrt();
+                value.innerText = valArr[valArr.length-1]
+            }
             break;
 
         //Use eval() for str to get value
@@ -84,12 +98,9 @@ let buttonHandler = (e) => {
                 str += e.target.value;
                 value.innerText = str;
             }
+            console.log("str:", str, "innervalue:", value.innerText)
             
     }
 }
 
-
 buttons.addEventListener("click", buttonHandler);
-
-
-// str[str.length - 1].match(/[/+-/*()]/g
