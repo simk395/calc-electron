@@ -1,26 +1,26 @@
-import Operations from "./operations.js";
+let buttons = document.querySelector("#buttons"),
+    string = "",
+    clear = 0;
 
-let buttons = document.querySelector("#buttons")
-let valueArr = [];
-
+//handles numeric and operational buttons
 let buttonHandler = (e) => {
     let value = document.querySelector(".value");
     switch(e.target.value){
+        //clear
         case "C": 
-            valueArr = [];
-            value.innerText = Operations.clear(); 
+            string = "";
+            value.innerText = clear; 
             break;
-        case "+":
+        //Use eval() for string to get value
+        case "=": value.innerText = eval(string);
+        //fix edge case if click on margin
+        case undefined: break;
+        //display values on screen
         default: 
-            valueArr.push(e.target.value);
-            value.innerText = valueArr.join('');
+            string += e.target.value;
+            value.innerText = string;
     }
-    console.log(valueArr)
-    // value.innerText = e.target.value;
-    
+
 }
 
 buttons.addEventListener("click", buttonHandler);
-
-//2 variables
-//if operation is clicked on then do the operation and show result

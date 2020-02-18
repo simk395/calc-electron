@@ -11,13 +11,16 @@ function createWindow () {
       height: 600,
       minHeight: 480,
       minWidth: 320,
+      webPreferences:{
+        devTools: false
+      }
     })
   
     // and load the index.html of the app.
     win.loadFile('index.html')
 
     //hide menu bar
-    // win.setMenu(null)
+    win.setMenu(null)
   }
   
   app.whenReady().then(createWindow)
