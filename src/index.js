@@ -1,6 +1,30 @@
 let buttons = document.querySelector("#buttons"),
     str = "",
-    valArr = [];
+    valArr = [],
+    flag = false;
+
+const operations = {
+    plus: () => {
+        valArr.push(str, "+");
+        str = '';
+    },
+    minus: () => {
+        valArr.push(str, "-");
+        str = '';
+    },
+    divide: () => {
+        valArr.push(str, "/");
+        str = '';
+    },
+    multiply: () => {
+        valArr.push(str, "*");
+        str = '';
+    },
+    modular: () => {
+        valArr.push(str, "%");
+        str = '';
+    },
+}
 
 //handles numeric and operational buttons
 let buttonHandler = (e) => {
@@ -9,38 +33,61 @@ let buttonHandler = (e) => {
         //clear
         case "C": 
             str = "";
+            valArr = [];
             value.innerText = 0; 
             break;
         
         case "+":
-            valArr.push(str)
-            valArr.push("+")
-            str = ''
+            operations.plus()
+            value.innerText = 0;
+            break;
+
+        case "-":
+            operations.minus()
+            value.innerText = 0;
+            break;
+
+        case "*":
+            operations.multiply()
+            value.innerText = 0;
+            break;
+
+        case "/":
+            operations.divide()
+            value.innerText = 0;
+            break;
+        case "%":
+            operations.modular()
+            value.innerText = 0;
+            break;
+
         //Use eval() for str to get value
         case "=":
-            if(str[str.length - 1].match(/[/+-/*]/g)){
-                str = str.substring(0, str.length - 1);
-                value.innerText = Math.round(eval(str) *100000)/100000;  
-            } else{
-                value.innerText = Math.round(eval(str) *100000)/100000;
-            }; 
+            let expression = valArr.join('') + str
+            value.innerText = Math.round( eval(expression) * 10000 ) / 10000;
+            console.log(expression)
+            valArr = [];
             str = value.innerText;
+            flag = true;
             break;
+
         //fix edge case if click on margin
         case undefined: break;
+
         //display values on screen
         default: 
-            if( e.target.classList.contains("ops") 
-                && str[str.length - 1].match(/[/+-/*()%]/g)){
-               str = str.substring(0, str.length - 1) + e.target.value;
-               value.innerText = str;
-               console.log("hello")
+            if(flag){
+                str = e.target.value;
+                value.innerText = str;
+                flag = false;
             }else{
                 str += e.target.value;
                 value.innerText = str;
             }
+            
     }
 }
+
 
 buttons.addEventListener("click", buttonHandler);
 
