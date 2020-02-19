@@ -21,11 +21,12 @@ let buttonHandler = (e) => {
             if(!val){
                 break;
             }
-            if(!valArr.length) display.innerText = Math.sqrt(val);
+            if(valArr.length === 0) display.innerText = Math.sqrt(val);
             else {
                 helperButton(e.target.value)
+                console.log(valArr, val)
                 expression.innerText = valArr.join('')
-                display.innerText = valArr[valArr.length-1]
+                display.innerText = Math.sqrt(val)
             }
             break;
         
@@ -71,7 +72,6 @@ let buttonHandler = (e) => {
             if(e.target.classList.contains("ops")){
                 helperButton(e.target.value)
                 expression.innerText = valArr.join('')
-                console.log(valArr)
             }else{
                 if(flag){
                     val = ''
@@ -85,7 +85,7 @@ let buttonHandler = (e) => {
 
 let helperButton = (operator) => {
     if( operator === "sqrt") {
-        valArr.push(Math.sqrt(val));
+        valArr.push(Math.sqrt(val) + '');
         val = '';
         return;
     }
@@ -103,4 +103,8 @@ let helperButton = (operator) => {
 buttons.addEventListener("click", buttonHandler);
 
 //case 1: adding value of a sqrt
+
+
 //case 2: adding value after sqrt ex. 15 + sqrt(4) then hit add will get 15++
+
+//problem: sqrt makes array last index not a operator which pops the sqrt value out
