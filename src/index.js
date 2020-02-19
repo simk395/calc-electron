@@ -5,7 +5,7 @@ let buttons = document.querySelector("#buttons"),
 
 //handles numeric and operational buttons
 let buttonHandler = (e) => {
-    let value = document.querySelector(".value");
+    let display = document.querySelector(".display");
     let expression = document.querySelector(".expression");
     switch(e.target.value){
         //clear
@@ -13,29 +13,54 @@ let buttonHandler = (e) => {
             str = "";
             valArr = [];
             expression.innerText = '';
-            value.innerText = 0; 
+            display.innerText = 0; 
             break;
         
+        //stores square root of value into valArr and displays sqrt of 
         case "sqrt":
-            if(!valArr.length) value.innerText = Math.sqrt(str);
+            if(!str){
+
+            }
+            if(!valArr.length) display.innerText = Math.sqrt(str);
             else {
                 helperButton(e.target.value)
                 expression.innerText = valArr.join('')
-                value.innerText = valArr[valArr.length-1]
+                display.innerText = valArr[valArr.length-1]
+            }
+            break;
+        
+        //fixes edge case of repeating zeros when display is 0
+        case "0":
+            if(str){
+                display.innerText = str + 0;
+                str += 0;
+                break;
+            }
+            break;
+        
+        //fixes edge case of repeating decimals
+        case ".":
+            if(!str.includes(".")){
+                display.innerText = str + ".";
+                str += "."
+                break;
             }
             break;
 
         //Use eval() for str to get value
         case "=":
+            if(!str){
+                valArr.pop()
+            }
             let equation = valArr.join('') + str
-            value.innerText = Math.round( eval(equation) * 10000 ) / 10000;
+            display.innerText = Math.round( eval(equation) * 10000 ) / 10000;
             expression.innerText = equation + "=";
             valArr = [];
-            str = value.innerText;
+            str = display.innerText;
             flag = true;
             break;
 
-        //fix edge case if click on margin
+        //fixes edge case if click on margin
         case undefined: break;
 
         //display values on screen
@@ -49,13 +74,12 @@ let buttonHandler = (e) => {
                     flag = false;
                 }
                 str += e.target.value;
-                value.innerText = str;
+                display.innerText = str;
             }
     }
 }
 
 let helperButton = (val) => {
-    let lastIndex = valArr[valArr.length - 1]
     if( val === "sqrt") {
         valArr.push(Math.sqrt(str));
         str = '';
@@ -74,5 +98,4 @@ let helperButton = (val) => {
 
 buttons.addEventListener("click", buttonHandler);
 
-//case 1: when ops is just clicked
 //case 2: when hitting sqrt after an ops
