@@ -1,5 +1,5 @@
 let buttons = document.querySelector("#buttons"),
-    str = "",
+    val = "",
     valArr = [],
     flag = false;
 
@@ -10,7 +10,7 @@ let buttonHandler = (e) => {
     switch(e.target.value){
         //clear
         case "C": 
-            str = "";
+            val = "";
             valArr = [];
             expression.innerText = '';
             display.innerText = 0; 
@@ -18,10 +18,10 @@ let buttonHandler = (e) => {
         
         //stores square root of value into valArr and displays sqrt of 
         case "sqrt":
-            if(!str){
-
+            if(!val){
+                break;
             }
-            if(!valArr.length) display.innerText = Math.sqrt(str);
+            if(!valArr.length) display.innerText = Math.sqrt(val);
             else {
                 helperButton(e.target.value)
                 expression.innerText = valArr.join('')
@@ -31,32 +31,35 @@ let buttonHandler = (e) => {
         
         //fixes edge case of repeating zeros when display is 0
         case "0":
-            if(str){
-                display.innerText = str + 0;
-                str += 0;
+            if(val){
+                display.innerText = val + 0;
+                val += 0;
                 break;
             }
             break;
         
         //fixes edge case of repeating decimals
         case ".":
-            if(!str.includes(".")){
-                display.innerText = str + ".";
-                str += "."
+            if(!val.includes(".")){
+                display.innerText = val + ".";
+                val += "."
                 break;
             }
             break;
 
-        //Use eval() for str to get value
+        //Use eval() for val to get value
         case "=":
-            if(!str){
+            if(!val){
                 valArr.pop()
             }
-            let equation = valArr.join('') + str
+            if(valArr.length === 0){
+                break
+            }
+            let equation = valArr.join('') + val
             display.innerText = Math.round( eval(equation) * 10000 ) / 10000;
             expression.innerText = equation + "=";
             valArr = [];
-            str = display.innerText;
+            val = display.innerText;
             flag = true;
             break;
 
@@ -67,33 +70,34 @@ let buttonHandler = (e) => {
         default: 
             if(e.target.classList.contains("ops")){
                 helperButton(e.target.value)
+                expression.innerText = valArr.join('')
                 console.log(valArr)
             }else{
                 if(flag){
-                    str = ''
+                    val = ''
                     flag = false;
                 }
-                str += e.target.value;
-                display.innerText = str;
+                val += e.target.value;
+                display.innerText = val;
             }
     }
 }
 
-let helperButton = (val) => {
-    if( val === "sqrt") {
-        valArr.push(Math.sqrt(str));
-        str = '';
+let helperButton = (operator) => {
+    if( operator === "sqrt") {
+        valArr.push(Math.sqrt(val));
+        val = '';
         return;
     }
-    if(!str && valArr.length > 0){
+    if(!val && valArr.length > 0){
         valArr.pop();
-        valArr.push(val);
+        valArr.push(operator);
         return;
-    } else if (!str) {
+    } else if (!val) {
          return
     }
-    valArr.push(str, val);
-    str = '';
+    valArr.push(val, operator);
+    val = '';
 }
 
 buttons.addEventListener("click", buttonHandler);
