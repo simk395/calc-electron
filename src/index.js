@@ -5,8 +5,8 @@ let buttons = document.querySelector("#buttons"),
 
 //handles numeric and operational buttons
 let buttonHandler = (e) => {
-    let display = document.querySelector(".display");
-    let expression = document.querySelector(".expression");
+    let display = document.querySelector(".display"),
+        expression = document.querySelector(".expression");
     switch(e.target.value){
         //clear
         case "C": 
@@ -102,4 +102,3 @@ let helperButton = (operator) => {
 
 buttons.addEventListener("click", buttonHandler);
 
-//case 2: when hitting sqrt after an ops
