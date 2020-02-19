@@ -102,3 +102,5 @@ let helperButton = (operator) => {
 
 buttons.addEventListener("click", buttonHandler);
 
+//case 1: adding value of a sqrt
+//case 2: adding value after sqrt ex. 15 + sqrt(4) then hit add will get 15++

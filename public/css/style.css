@@ -22,13 +22,20 @@ body{
     overflow: auto;
     height: 30vh;
     background: #C9D9C8;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.expression{
+    font-family: "Digital-7";
+    font-size: 10vh;
 }
 
 .display{
     font-family: "Digital-7";
-    float: right;
-    font-size: 30vh;
-    
+    font-size: 20vh;
 }
 
 /* Buttons Container */
