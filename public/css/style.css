@@ -24,7 +24,7 @@ body{
     background: #C9D9C8;
 }
 
-.value{
+.display{
     font-family: "Digital-7";
     float: right;
     font-size: 30vh;
@@ -72,6 +72,7 @@ body{
 .num{
     background: floralwhite;
 }
+
 
 .ops{
     background: #DFE1E5;
