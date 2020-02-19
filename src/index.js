@@ -85,7 +85,7 @@ let buttonHandler = (e) => {
 
 let helperButton = (operator) => {
     if( operator === "sqrt") {
-        valArr.push(Math.sqrt(val) + '');
+        valArr.push(Math.sqrt(val), '');
         val = '';
         return;
     }
@@ -103,8 +103,4 @@ let helperButton = (operator) => {
 buttons.addEventListener("click", buttonHandler);
 
 //case 1: adding value of a sqrt
-
-
-//case 2: adding value after sqrt ex. 15 + sqrt(4) then hit add will get 15++
-
-//problem: sqrt makes array last index not a operator which pops the sqrt value out
+//case 2: hitting sqrt for first number then operator gives value before sqrt
