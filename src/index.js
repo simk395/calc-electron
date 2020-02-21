@@ -21,12 +21,15 @@ let buttonHandler = (e) => {
             if(!val){
                 break;
             }
-            if(valArr.length === 0) display.innerText = Math.sqrt(val);
-            else {
+            //if case is to make value not show expression if its only 1 value. ex. sqrt(4) = 2 will not show the expression at the top
+            if(valArr.length === 0){
+                display.innerText = Math.sqrt(val);
                 helperButton(e.target.value)
-                console.log(valArr, val)
-                expression.innerText = valArr.join('')
+            } 
+            else {
                 display.innerText = Math.sqrt(val)
+                helperButton(e.target.value)
+                expression.innerText = valArr.join('')
             }
             break;
         
@@ -71,7 +74,10 @@ let buttonHandler = (e) => {
         default: 
             if(e.target.classList.contains("ops")){
                 helperButton(e.target.value)
+                let arr = [...valArr];
+                arr.pop();
                 expression.innerText = valArr.join('')
+                display.innerText = eval(arr.join(''))
             }else{
                 if(flag){
                     val = ''
@@ -101,6 +107,3 @@ let helperButton = (operator) => {
 }
 
 buttons.addEventListener("click", buttonHandler);
-
-//case 1: adding value of a sqrt
-//case 2: hitting sqrt for first number then operator gives value before sqrt
